@@ -11,10 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'TooMuchDrinking'),
     );
   }
 }
@@ -35,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ('assets/images/drinking2.webp'),
     ('assets/images/drinking4.jpg'),
   ];
-  String imgNumber = '';
+  String imgNumber = 'assets/images/drinking1.webp';
   // getImages() {
   //   for (var i = 0; i < imgList.length; i++) {
   //     String imgs = imgList[i];
@@ -53,15 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     if (_counter == 1) {
       warningStatus = aCoupleDown;
-      imgList[0] = imgNumber;
-    }
-    if (_counter == 4) {
+      imgNumber = imgList[0];
+    } else if (_counter == 3) {
       warningStatus = afeweDown;
-      imgList[1] = imgNumber;
-    }
-    if (_counter == 6) {
+      imgNumber = imgList[1];
+    } else if (_counter == 6) {
       warningStatus = tooMucheDown;
-      imgList[2] = imgNumber;
+      imgNumber = imgList[2];
     } else {}
   }
 
@@ -76,12 +75,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(warningStatus),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(warningStatus),
             SizedBox(
               height: 200,
               width: 200,
